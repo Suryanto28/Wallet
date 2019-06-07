@@ -1,0 +1,29 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/trbo_bg.qm</file>
+        <file alias="ca">locale/trbo_ca.qm</file>
+        <file alias="cs">locale/trbo_cs.qm</file>
+        <file alias="da">locale/trbo_da.qm</file>
+        <file alias="de">locale/trbo_de.qm</file>
+        <file alias="en">locale/trbo_en.qm</file>
+        <file alias="en_US">locale/trbo_en_US.qm</file>
+        <file alias="es">locale/trbo_es.qm</file>
+        <file alias="fi">locale/trbo_fi.qm</file>
+        <file alias="fr_FR">locale/trbo_fr_FR.qm</file>
+        <file alias="it">locale/trbo_it.qm</file>
+        <file alias="ja">locale/trbo_ja.qm</file>
+        <file alias="ko_KR">locale/trbo_ko_KR.qm</file>
+        <file alias="nl">locale/trbo_nl.qm</file>
+        <file alias="pl">locale/trbo_pl.qm</file>
+        <file alias="pt">locale/trbo_pt.qm</file>
+        <file alias="pt_BR">locale/trbo_pt_BR.qm</file>
+        <file alias="ro_RO">locale/trbo_ro_RO.qm</file>
+        <file alias="ru">locale/trbo_ru.qm</file>
+        <file alias="sk">locale/trbo_sk.qm</file>
+        <file alias="sv">locale/trbo_sv.qm</file>
+        <file alias="tr">locale/trbo_tr.qm</file>
+        <file alias="uk">locale/trbo_uk.qm</file>
+        <file alias="zh_CN">locale/trbo_zh_CN.qm</file>
+        <file alias="zh_TW">locale/trbo_zh_TW.qm</file>
+    </qresource>
+</RCC>
