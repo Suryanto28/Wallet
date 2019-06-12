@@ -26,7 +26,7 @@ Please reach out at admin@trbo.cc
 | Masternode Collateral | 5,000,000 TRBO        |
 | Maturity              | 20 blocks             |
 | Stake Age             | 2 hours               |
-| Premine (Swap Funds)  | 1,845,200 TRBO        |
+| Premine (Swap Funds)  | 1,845,200,000 TRBO        |
 | **Max Supply**        |**10,000,000,000 TRBO**|
 
 ### Block Information
