@@ -2096,6 +2096,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     CBlockUndo blockundo;
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
     CAmount nValueOut = 0;
+    CAmount nValueOutUnspendable = 0;
     CAmount nValueIn = 0;
     unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS;
     for (unsigned int i = 0; i < block.vtx.size(); i++) {
@@ -2131,6 +2132,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             control.Add(vChecks);
         }
         nValueOut += tx.GetValueOut();
+		
+		// Unspendable UTXO (like coins burned) will be subtracted from nMoneySupply
+        nValueOutUnspendable += tx.GetValueOutUnspendable();
 
         CTxUndo undoDummy;
         if (i > 0) {
@@ -2145,7 +2149,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     // track money supply and mint amount info
     CAmount nMoneySupplyPrev = pindex->pprev ? pindex->pprev->nMoneySupply : 0;
     pindex->nMoneySupply = nMoneySupplyPrev + nValueOut - nValueIn;
-    pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
+    // Subtract from the money supply the unspendable UTXO
+    pindex->nMoneySupply -= nValueOutUnspendable;
+ 
+	pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
+    // Unspendable Value (coins burn) can cause a negative nMint value
+    if (pindex->nMint < 0)
+        pindex->nMint = 0;
 
     int64_t nTime1 = GetTimeMicros();
     nTimeConnect += nTime1 - nTimeStart;
