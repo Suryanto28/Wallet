@@ -1,4 +1,4 @@
-TRBO Core Wallet Development Source - Do not compile
+TRBO Core Wallet Source
 =================================================
 
 TRBO (TRBO) is a global, open source, decentralised cryptocurrency designed to utilise fast & low fee transactions while being environmentally friendly.  TRBO utilises a Proof of Stake (PoS) and Masternode protocol, inspired by PIVX and Dash, for securing its network - meaning that it can be mined on any computer or server with minimal electricity cost.
