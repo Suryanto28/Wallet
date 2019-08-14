@@ -57,7 +57,7 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (0,      uint256("7ba6b76c01fb05fbb814af8379861f53c336fcd0ee5baaae7516552ef90622bd")) //Genesis
     (200,      uint256("661cf7bafcb768e2cc02a398a28d5183058fd0efb360e574afff5696accc0a52")) //PoW End
     (20000,      uint256("8b44b8e463b4217693dd10c8ed8042ad3dbd7f491310f0fb5f1a1d819ae328a3")) //Block before reward change
-    (58000,      uint256("8b44b8e463b4217693dd10c8ed8042ad3dbd7f491310f0fb5f1a1d819ae328a3")); //Block before reward change
+    (58000,      uint256("0b9f3ea9f8baabe69f40695c7726d4c30d4cd09962ae59a80f879f1303c9df3e")); //New Wallet Update Due 15/08/19
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
