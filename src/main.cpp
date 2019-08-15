@@ -1570,43 +1570,43 @@ int64_t GetBlockValue(int nHeight)
         nSubsidy = 100 * COIN;
     else if (nHeight > 20001 && nHeight <= 100000)
         nSubsidy = 4000 * COIN;
-    else if (nHeight > 100001 && nHeight <= 200000)
+    else if (nHeight > 100000 && nHeight <= 200000)
         nSubsidy = 4500 * COIN;
-    else if (nHeight > 200001 && nHeight <= 300000)
+    else if (nHeight > 200000 && nHeight <= 300000)
         nSubsidy = 5000 * COIN;
-    else if (nHeight > 300001 && nHeight <= 400000)
+    else if (nHeight > 300000 && nHeight <= 400000)
         nSubsidy = 5500 * COIN;
-    else if (nHeight > 400001 && nHeight <= 500000)
+    else if (nHeight > 400000 && nHeight <= 500000)
         nSubsidy = 5000 * COIN;
-    else if (nHeight > 500001 && nHeight <= 600000)
+    else if (nHeight > 500000 && nHeight <= 600000)
         nSubsidy = 4500 * COIN;
-    else if (nHeight > 600001 && nHeight <= 700000)
+    else if (nHeight > 600000 && nHeight <= 700000)
         nSubsidy = 4000 * COIN;
-    else if (nHeight > 700001 && nHeight <= 800000)
+    else if (nHeight > 700000 && nHeight <= 800000)
         nSubsidy = 3500 * COIN;
-    else if (nHeight > 800001 && nHeight <= 900000)
+    else if (nHeight > 800000 && nHeight <= 900000)
         nSubsidy = 3000 * COIN;
-    else if (nHeight > 900001 && nHeight <= 1000000)
+    else if (nHeight > 900000 && nHeight <= 1000000)
         nSubsidy = 2500 * COIN;
-    else if (nHeight > 1000001 && nHeight <= 1100000)
+    else if (nHeight > 1000000 && nHeight <= 1100000)
         nSubsidy = 2000 * COIN;
-	else if (nHeight > 1100001 && nHeight <= 1250000)
+    else if (nHeight > 1100000 && nHeight <= 1250000)
         nSubsidy = 2500 * COIN;
-	else if (nHeight > 1250001 && nHeight <= 1400000)
+    else if (nHeight > 1250000 && nHeight <= 1400000)
         nSubsidy = 3000 * COIN;
-	else if (nHeight > 1400001 && nHeight <= 1550000)
+    else if (nHeight > 1400000 && nHeight <= 1550000)
         nSubsidy = 3500 * COIN;
-	else if (nHeight > 1550001 && nHeight <= 1700000)
+    else if (nHeight > 1550000 && nHeight <= 1700000)
         nSubsidy = 4000 * COIN;
-	else if (nHeight > 1700001 && nHeight <= 1900000)
+    else if (nHeight > 1700000 && nHeight <= 1900000)
         nSubsidy = 3500 * COIN;
-	else if (nHeight > 1900001 && nHeight <= 2100000)
+    else if (nHeight > 1900000 && nHeight <= 2100000)
         nSubsidy = 3000 * COIN;
-	else if (nHeight > 2100001 && nHeight <= 2300000)
+    else if (nHeight > 2100000 && nHeight <= 2300000)
         nSubsidy = 2000 * COIN;
-	else if (nHeight > 2300001 && nHeight <= 2500000)
+    else if (nHeight > 2300000 && nHeight <= 2500000)
         nSubsidy = 1000 * COIN;
-	else if (nHeight > 2500001 && nHeight <= 2700000)
+    else if (nHeight > 2500000 && nHeight <= 2700000)
         nSubsidy = 165 * COIN;
     else
         nSubsidy = 0.01 * COIN;
@@ -2096,6 +2096,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     CBlockUndo blockundo;
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
     CAmount nValueOut = 0;
+    CAmount nValueOutUnspendable = 0;
     CAmount nValueIn = 0;
     unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS;
     for (unsigned int i = 0; i < block.vtx.size(); i++) {
@@ -2131,6 +2132,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             control.Add(vChecks);
         }
         nValueOut += tx.GetValueOut();
+		
+		// Unspendable UTXO (like coins burned) will be subtracted from nMoneySupply
+        nValueOutUnspendable += tx.GetValueOutUnspendable();
 
         CTxUndo undoDummy;
         if (i > 0) {
@@ -2145,7 +2149,13 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     // track money supply and mint amount info
     CAmount nMoneySupplyPrev = pindex->pprev ? pindex->pprev->nMoneySupply : 0;
     pindex->nMoneySupply = nMoneySupplyPrev + nValueOut - nValueIn;
-    pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
+    // Subtract from the money supply the unspendable UTXO
+    pindex->nMoneySupply -= nValueOutUnspendable;
+ 
+	pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
+    // Unspendable Value (coins burn) can cause a negative nMint value
+    if (pindex->nMint < 0)
+        pindex->nMint = 0;
 
     int64_t nTime1 = GetTimeMicros();
     nTimeConnect += nTime1 - nTimeStart;
