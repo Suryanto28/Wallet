@@ -59,7 +59,7 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (20000,      uint256("8b44b8e463b4217693dd10c8ed8042ad3dbd7f491310f0fb5f1a1d819ae328a3")) //Block before reward change
     (58000,      uint256("0b9f3ea9f8baabe69f40695c7726d4c30d4cd09962ae59a80f879f1303c9df3e")) //New Wallet Update Due 15/08/19
     (100000,      uint256("f315084d51d5baabd114e1339830e97f8530fa1d0f5479d04ddd6ac2e0f2376b")) //Block reward change
-    (200000,      uint256("1c372f50f10ee7aef43aab7e86649f40671b534c675ea55673b8126f329809aa")); //Block reward change
+    (200000,      uint256("1c372f50f10ee7aef43aab7e86649f40671b534c675ea55673b8126f329809aa")) //Block reward change
     (300000,      uint256("9f02fc6abf2b88e1f408eecd2e445ae35f34ac78cc2d0467c2593da493e8a11a")); //Block reward change
 
 static const Checkpoints::CCheckpointData data = {
