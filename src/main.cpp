@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2018-2019 The TRBO Developers
+// Copyright (c) 2018-2020 The TRBO Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -2173,6 +2173,20 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                          REJECT_INVALID, "bad-cb-amount");
     }
 
+    if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
+
+        if (!IsBlockPayeeValid(block, pindex->nHeight)) {
+
+            mapRejectedBlocks.insert(std::make_pair(block.GetHash(), GetTime()));
+
+            return state.DoS(0, error("ConnectBlock(SCC): couldn't find masternode or superblock payments"),
+
+                                      REJECT_INVALID, "bad-cb-payee");
+
+        }
+
+    }
+	
     if (!control.Wait())
         return state.DoS(100, error("%s: CheckQueue failed", __func__), REJECT_INVALID, "block-validation-failed");
     int64_t nTime2 = GetTimeMicros();

@@ -394,16 +394,8 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     }
 	
     if (settings.value("fShowMasternodesTab").toBool()) {
-        QPixmap masternodesIconInactive(":/icons/masternodes");
-        QPixmap masternodesIconActive(":icons/masternodes_active");
-        QIcon masternodesIcon(masternodesIconInactive);
 
-        masternodesIcon.addPixmap(masternodesIconActive,QIcon::Selected,QIcon::On);
-        masternodesIcon.addPixmap(masternodesIconActive,QIcon::Selected,QIcon::Off);
-        masternodesIcon.addPixmap(masternodesIconActive,QIcon::Active,QIcon::On);
-        masternodesIcon.addPixmap(masternodesIconActive,QIcon::Active,QIcon::Off);
-
-        masternodeAction = new QAction(masternodesIcon, tr("&Masternodes"), this);
+        masternodeAction = new QAction(QIcon(":/icons/masternodes"), tr("&Masternodes"), this);
         masternodeAction->setStatusTip(tr("Browse masternodes"));
         masternodeAction->setToolTip(masternodeAction->statusTip());
         masternodeAction->setCheckable(true);
@@ -707,7 +699,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
     historyAction->setEnabled(enabled);
-    masternodeAction->setEnabled(enabled);
+
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
         masternodeAction->setEnabled(enabled);

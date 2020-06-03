@@ -2,7 +2,7 @@
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Copyright (c) 2017-2019 The Bitcoin Green developers
-// Copyright (c) 2018-2019 The TRBO Developers
+// Copyright (c) 2018-2020 The TRBO Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +13,7 @@
  * network protocol versioning
  */
 
-static const int PROTOCOL_VERSION = 70009;
+static const int PROTOCOL_VERSION = 70010;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -22,8 +22,8 @@ static const int INIT_PROTO_VERSION = 209;
 static const int GETHEADERS_VERSION = 60077;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION = 70008;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70009;
+static const int MIN_PEER_PROTO_VERSION = 70009;
+static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70010;
 
 //! fork blocks
 static const int SOFT_FORK_VERSION_120 = 260000;
@@ -42,6 +42,6 @@ static const int MEMPOOL_GD_VERSION = 60002;
 static const int NO_BLOOM_VERSION = 70005;
 
 //! Community proposal starts with this version
-static const int COMMUNITY_PROPOSAL_VERSION = 70013;
+static const int COMMUNITY_PROPOSAL_VERSION = 70016;
 
 #endif // BITCOIN_VERSION_H
