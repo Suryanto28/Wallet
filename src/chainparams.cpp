@@ -3,7 +3,7 @@
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Copyright (c) 2017-2019 The Bitcoin Green developers
-// Copyright (c) 2018-2019 The TRBO Developers
+// Copyright (c) 2018-2020 The TRBO Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -57,12 +57,15 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (0,      uint256("7ba6b76c01fb05fbb814af8379861f53c336fcd0ee5baaae7516552ef90622bd")) //Genesis
     (200,      uint256("661cf7bafcb768e2cc02a398a28d5183058fd0efb360e574afff5696accc0a52")) //PoW End
     (20000,      uint256("8b44b8e463b4217693dd10c8ed8042ad3dbd7f491310f0fb5f1a1d819ae328a3")) //Block before reward change
-    (58000,      uint256("0b9f3ea9f8baabe69f40695c7726d4c30d4cd09962ae59a80f879f1303c9df3e")); //New Wallet Update Due 15/08/19
+    (58000,      uint256("0b9f3ea9f8baabe69f40695c7726d4c30d4cd09962ae59a80f879f1303c9df3e")) //New Wallet Update Due 15/08/19
+    (100000,      uint256("f315084d51d5baabd114e1339830e97f8530fa1d0f5479d04ddd6ac2e0f2376b")) //Block reward change
+    (200000,      uint256("1c372f50f10ee7aef43aab7e86649f40671b534c675ea55673b8126f329809aa")) //Block reward change
+    (300000,      uint256("9f02fc6abf2b88e1f408eecd2e445ae35f34ac78cc2d0467c2593da493e8a11a")); //Block reward change
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1565699747, // * UNIX timestamp of last checkpoint block
-    58000,     // * total number of transactions between genesis and last checkpoint
+    1588362151, // * UNIX timestamp of last checkpoint block
+    300000,     // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     1000        // * estimated number of transactions per day after checkpoint
 };
@@ -147,6 +150,12 @@ public:
         vSeeds.push_back(CDNSSeedData("94.177.242.241", "94.177.242.241"));
         vSeeds.push_back(CDNSSeedData("185.35.64.141", "185.35.64.141"));
         vSeeds.push_back(CDNSSeedData("94.177.251.97", "94.177.251.97"));
+        vSeeds.push_back(CDNSSeedData("59.40.115.42", "59.40.115.42"));
+		vSeeds.push_back(CDNSSeedData("217.61.98.224", "217.61.98.224"));
+		vSeeds.push_back(CDNSSeedData("213.136.86.60", "213.136.86.60"));
+		vSeeds.push_back(CDNSSeedData("5.231.205.119", "5.231.205.119"));
+		vSeeds.push_back(CDNSSeedData("89.36.215.212", "89.36.215.212"));
+		vSeeds.push_back(CDNSSeedData("89.40.115.42", "89.40.115.42"));
 		
         // TRBO addresses start with 'T'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 65);
